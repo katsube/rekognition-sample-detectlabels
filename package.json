@@ -1,0 +1,30 @@
+{
+  "name": "rekognition-sample-detectlabels",
+  "version": "1.0.0",
+  "description": "Detecting labels in an image",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/katsube/Rekognition-sample-detectlabels.git"
+  },
+  "keywords": [
+    "Amazon",
+    "AWS",
+    "rekognition",
+    "AI",
+    "Image"
+  ],
+  "author": "M.Katsube",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/katsube/Rekognition-sample-detectlabels/issues"
+  },
+  "homepage": "https://github.com/katsube/Rekognition-sample-detectlabels#readme",
+  "dependencies": {
+    "aws-sdk": "^2.853.0",
+    "dotenv": "^8.2.0"
+  }
+}
