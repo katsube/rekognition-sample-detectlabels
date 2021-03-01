@@ -1,0 +1,131 @@
+{
+  "Labels": [
+    {
+      "Name": "Food",
+      "Confidence": 94.963134765625,
+      "Instances": [],
+      "Parents": []
+    },
+    {
+      "Name": "Steak",
+      "Confidence": 94.30536651611328,
+      "Instances": [],
+      "Parents": [
+        {
+          "Name": "Food"
+        }
+      ]
+    },
+    {
+      "Name": "Plant",
+      "Confidence": 89.32837677001953,
+      "Instances": [],
+      "Parents": []
+    },
+    {
+      "Name": "Bread",
+      "Confidence": 83.53762817382812,
+      "Instances": [
+        {
+          "BoundingBox": {
+            "Width": 0.27659285068511963,
+            "Height": 0.580934464931488,
+            "Left": 0.45731204748153687,
+            "Top": 0.3908308446407318
+          },
+          "Confidence": 83.53762817382812
+        }
+      ],
+      "Parents": [
+        {
+          "Name": "Food"
+        }
+      ]
+    },
+    {
+      "Name": "Beer",
+      "Confidence": 76.15029907226562,
+      "Instances": [
+        {
+          "BoundingBox": {
+            "Width": 0.2506800889968872,
+            "Height": 0.48307228088378906,
+            "Left": 0.7482089996337891,
+            "Top": 0.12553729116916656
+          },
+          "Confidence": 76.15029907226562
+        },
+        {
+          "BoundingBox": {
+            "Width": 0.24844741821289062,
+            "Height": 0.40719789266586304,
+            "Left": 0.6823198795318604,
+            "Top": 0.016171999275684357
+          },
+          "Confidence": 70.66219329833984
+        }
+      ],
+      "Parents": [
+        {
+          "Name": "Beverage"
+        }
+      ]
+    },
+    {
+      "Name": "Beverage",
+      "Confidence": 76.15029907226562,
+      "Instances": [],
+      "Parents": []
+    },
+    {
+      "Name": "Vegetable",
+      "Confidence": 65.45551300048828,
+      "Instances": [],
+      "Parents": [
+        {
+          "Name": "Plant"
+        },
+        {
+          "Name": "Food"
+        }
+      ]
+    },
+    {
+      "Name": "Broccoli",
+      "Confidence": 61.85454177856445,
+      "Instances": [],
+      "Parents": [
+        {
+          "Name": "Vegetable"
+        },
+        {
+          "Name": "Plant"
+        },
+        {
+          "Name": "Food"
+        }
+      ]
+    },
+    {
+      "Name": "Dinner",
+      "Confidence": 61.0947265625,
+      "Instances": [],
+      "Parents": [
+        {
+          "Name": "Food"
+        }
+      ]
+    },
+    {
+      "Name": "Dish",
+      "Confidence": 59.321258544921875,
+      "Instances": [],
+      "Parents": [
+        {
+          "Name": "Food"
+        }
+      ]
+    }
+  ],
+  "LabelModelVersion": "2.0"
+}

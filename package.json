@@ -25,6 +25,7 @@
   "homepage": "https://github.com/katsube/Rekognition-sample-detectlabels#readme",
   "dependencies": {
     "aws-sdk": "^2.853.0",
+    "canvas": "^2.6.1",
     "dotenv": "^8.2.0"
   }
 }
