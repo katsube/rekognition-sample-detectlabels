@@ -15,7 +15,7 @@ const FILES = [
 ]
 
 // 解析するファイル
-const FILE = FILES[0]
+const FILE = FILES[2]
 
 
 //-----------------------------------------------
@@ -24,6 +24,8 @@ const FILE = FILES[0]
 const AWS = require('aws-sdk')
 const fs = require('fs')
 const { createCanvas, loadImage } = require('canvas')
+
+// .envを環境変数に
 require('dotenv').config()
 
 //-----------------------------------------------
@@ -51,7 +53,10 @@ client.detectLabels(params, (err, response) =>{
     console.log(err, err.stack)
   }
   else {
+    // 画像に線を引いて保存
     drawLine(response.Labels)
+
+    // レスポンスを保存
     saveFile(FILE.json, JSON.stringify(response, null, 2))
   }
 })
@@ -61,16 +66,13 @@ client.detectLabels(params, (err, response) =>{
  * 発見されたラベルの箇所に線を引く
  *
  * @param {object} label  Rekognitionからのレスポンス
- * @param {string} path   元画像ファイルのパス
- * @param {number} width  画像の横幅
- * @param {number} height 画像の高さ
  */
 async function drawLine(labels){
   const canvas = createCanvas(FILE.width, FILE.height)
-  const image = await loadImage(FILE.origin)
   const ctx = canvas.getContext('2d')
 
   // 画像を貼り付け
+  const image = await loadImage(FILE.origin)
   ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
 
   // 線のスタイル設定
@@ -79,30 +81,36 @@ async function drawLine(labels){
 
   // 線を描く
   for( let label of labels ){
-    console.log(`${label.Name} - ${label.Confidence}`)
+    const name = label.Name
     for( let instance of label.Instances ){
+      // 画像上の座標に変換
       const box = instance.BoundingBox
-      const boxleft   = Math.floor(box.Left * FILE.width)
-      const boxtop    = Math.floor(box.Top  * FILE.height)
-      const boxwidth  = Math.floor(box.Width * FILE.width)
-      const boxheight = Math.floor(box.Height * FILE.height)
-      console.log(`  ${boxleft},${boxtop},${boxwidth},${boxheight}`)
+      const boxLeft   = Math.floor(box.Left * FILE.width)
+      const boxTop    = Math.floor(box.Top  * FILE.height)
+      const boxWidth  = Math.floor(box.Width * FILE.width)
+      const boxHeight = Math.floor(box.Height * FILE.height)
 
+      // ラベル
+      ctx.font = '20px serif';
+      ctx.fillText(name, boxLeft+10, boxTop+20);
+
+      // 線
       ctx.beginPath();
-      ctx.moveTo(boxleft, boxtop);                    // 左上からスタート
-      ctx.lineTo(boxleft+boxwidth, boxtop);           // 右上
-      ctx.lineTo(boxleft+boxwidth, boxtop+boxheight); // 右下
-      ctx.lineTo(boxleft,boxtop+boxheight);           // 左下
-      ctx.lineTo(boxleft, boxtop);                    // 左上に戻る
+      ctx.moveTo(boxLeft, boxTop);                    // 左上からスタート
+      ctx.lineTo(boxLeft+boxWidth, boxTop);           // 右上
+      ctx.lineTo(boxLeft+boxWidth, boxTop+boxHeight); // 右下
+      ctx.lineTo(boxLeft,boxTop+boxHeight);           // 左下
+      ctx.lineTo(boxLeft, boxTop);                    // 左上に戻る
       ctx.stroke();
     }
   }
 
   // JPEGに変換して保存
   canvas.toBuffer((err, buff) => {
-    if (err) throw err
-    saveFile(FILE.out, buff)
-  }, 'image/jpeg', { quality: 0.95 })
+      if (err) throw err
+      saveFile(FILE.out, buff)
+    },
+    'image/jpeg', { quality: 0.95 })
 }
 
 /**
